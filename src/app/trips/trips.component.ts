@@ -16,6 +16,14 @@ import { Component, OnInit } from '@angular/core';
     </ul>
   `,
   styles: [
+    `
+    .confirmed {
+      color: green;
+    }
+    .waiting {
+      color: orange;
+    }
+  `,
   ]
 })
 export class TripsComponent {

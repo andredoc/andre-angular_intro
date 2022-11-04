@@ -8,16 +8,7 @@ import { Component } from "@angular/core";
     <app-trips></app-trips>
     <router-outlet></router-outlet>
   `,
-  styles: [
-    `
-      .confirmed {
-        color: green;
-      }
-      .waiting {
-        color: orange;
-      }
-    `,
-  ],
+  styles: [],
 })
 export class AppComponent {
   title = "Astro Bookings";
