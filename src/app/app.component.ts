@@ -1,32 +1,110 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'app-root',
+  selector: "app-root",
   template: `
-    <!--The content below is only a placeholder and can be replaced.-->
-    <div style="text-align:center" class="content">
-      <h1>
-        Welcome to {{title}}!
-      </h1>
-      <span style="display: block">{{ title }} app is running!</span>
-      <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-    </div>
-    <h2>Here are some links to help you start: </h2>
+    <h1>{{ title }}</h1>
+    <h3>We work with {{ activeAgenciesCounter }} agencies</h3>
     <ul>
-      <li>
-        <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-      </li>
-      <li>
-        <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-      </li>
-      <li>
-        <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-      </li>
+      <ng-container *ngFor="let agency of agencies">
+        <li *ngIf="agency.status === 'Active'">
+          <span>{{ agency.name | uppercase }}</span>
+          <span *ngIf="agency.range === 'Interplanetary'">🪐</span>
+          <span *ngIf="agency.range === 'Orbital'">🌍</span>
+        </li>
+      </ng-container>
+    </ul>
+    <h3>Offering {{ trips.length }} trips</h3>
+    <ul>
+      <ng-container *ngFor="let trip of trips">
+        <li class="{{ trip.status | lowercase }}">
+          {{ trip.destination }}
+        </li>
+      </ng-container>
     </ul>
     <router-outlet></router-outlet>
   `,
-  styles: []
+  styles: [
+    `
+      .confirmed {
+        color: green;
+      }
+      .waiting {
+        color: orange;
+      }
+    `,
+  ],
 })
 export class AppComponent {
-  title = 'andre-angular_intro';
+  title = "Astro Bookings";
+  agencies = [
+    { name: "Space X", range: "Interplanetary", status: "Active" },
+    { name: "Blue Origin", range: "Orbital", status: "Active" },
+    { name: "Virgin Galactic", range: "Orbital", status: "Pending" },
+  ];
+  trips = [
+    {
+      id: "space-y-moon-1",
+      agencyId: "space-y",
+      agencyTripCode: "moon",
+      destination: "The Moon",
+      places: 14,
+      startDate: "2023-02-01",
+      endDate: "2023-03-01",
+      flightPrice: 1200000,
+      stayingNightPrice: 10000,
+      kind: "WithStay",
+      status: "Confirmed",
+      extraLuggagePricePerKilo: 2000,
+      premiumFoodPrice: 0,
+    },
+    {
+      id: "space-y-mars-2",
+      agencyId: "space-y",
+      agencyTripCode: "mars",
+      destination: "Mars",
+      places: 8,
+      startDate: "2024-01-01",
+      endDate: "2024-05-01",
+      flightPrice: 8400000,
+      stayingNightPrice: 10000,
+      kind: "WithStay",
+      status: "Confirmed",
+      extraLuggagePricePerKilo: 50000,
+      premiumFoodPrice: 0,
+    },
+    {
+      id: "green-origin-low-orbit-3",
+      agencyId: "green-origin",
+      agencyTripCode: "low-orbit",
+      destination: "Low Orbit",
+      places: 0,
+      startDate: "2022-04-01",
+      endDate: "2022-04-01",
+      flightPrice: 320000,
+      stayingNightPrice: 0,
+      kind: "TripOnly",
+      status: "Waiting",
+      extraLuggagePricePerKilo: 0,
+      premiumFoodPrice: 1000,
+    },
+    {
+      id: "green-origin-iss-4",
+      agencyId: "green-origin",
+      agencyTripCode: "iss",
+      destination: "ISS",
+      places: 6,
+      startDate: "2022-06-01",
+      endDate: "2022-06-01",
+      flightPrice: 800000,
+      stayingNightPrice: 0,
+      kind: "TripOnly",
+      status: "Waiting",
+      extraLuggagePricePerKilo: 0,
+      premiumFoodPrice: 1000,
+    },
+  ];
+  activeAgenciesCounter = this.agencies.filter(
+    (agency) => agency.status === "Active"
+  ).length;
 }
