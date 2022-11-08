@@ -10,19 +10,14 @@ import { Component, Input, OnInit } from '@angular/core';
           [url]="repoUrl" 
           title="https://github.com/andredoc/andre-angular_intro"
         ></app-link>
-        made by 
-        <app-link 
-          [caption]="author" 
-          [url]="authorUrl"
-        ></app-link>
+        <app-author></app-author>
       </h6>
+      <app-legal></app-legal>
     </footer>
   `,
   styles: []
 })
 export class FooterComponent {
   @Input() title= "";
-  author = "Andre Documet";
-  authorUrl = "https://www.linkedin.com/in/andre-documet/";
   repoUrl = "https://github.com/andredoc/andre-angular_intro";
 }

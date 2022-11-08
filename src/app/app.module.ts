@@ -3,24 +3,23 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AgenciesComponent } from './agencies/agencies.component';
-import { TripsComponent } from './trips/trips.component';
-import { HeaderComponent } from './components/header.component';
-import { FooterComponent } from './components/footer.component';
-import { LinkComponent } from './components/link.component';
+import { AgenciesComponent } from './routes/home/agencies.component';
+import { TripsComponent } from './routes/home/trips.component';
+import { LinkComponent } from './core/link.component';
+import { CoreModule } from './core/core.module';
+import { HomeModule } from './routes/home/home.module';
+import { AboutModule } from './routes/about/about.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AgenciesComponent,
-    TripsComponent,
-    HeaderComponent,
-    FooterComponent,
-    LinkComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    CoreModule,
+    HomeModule,
+    AboutModule
   ],
   providers: [],
   bootstrap: [AppComponent]
