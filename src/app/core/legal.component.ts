@@ -13,7 +13,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LegalComponent implements OnInit {
 
-  aboutUrl="/about";
+  // aboutUrl="/about";
   constructor() { }
 
   ngOnInit(): void {

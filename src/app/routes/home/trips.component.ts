@@ -11,6 +11,9 @@ import { Component, OnInit } from '@angular/core';
           <span> 👨🏻‍🚀{{ trip.places | number:"2.0-0" }}</span>
           <span> ⬆{{ trip.startDate | date:"dd-MMM-yyyy" }}</span>
           <span> 💶{{ trip.flightPrice | currency: 'EUR' }}</span>
+          <span role="button" [routerLink]="['book', trip.id]">
+            ✍🏼 Make a booking
+          </span>
         </li>
       </ng-container>
     </ul>

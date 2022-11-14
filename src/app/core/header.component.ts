@@ -4,7 +4,16 @@ import { Component, Input } from '@angular/core';
   selector: 'app-header',
   template: `
     <header>
-      <a routerLink="/">{{ title }}</a>
+      <nav>
+        <ul>
+          <li>
+            <strong routerLink="/">{{ title }}</strong>
+          </li>
+        </ul>
+        <ul>
+          <li><a routerLink="/agencies">➡️ Agencies</a> </li>
+        </ul>
+      </nav>
     </header>
   `,
   styles: [

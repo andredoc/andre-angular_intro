@@ -14,6 +14,12 @@ const routes: Routes = [
   },
   { path: 'contact', 
     loadChildren: () => import('./routes/contact/contact.module').then(m => m.ContactModule)
+  },
+  { path: 'agencies',
+    loadChildren: () => import('./routes/angencies/angencies.module').then(m => m.AngenciesModule) 
+  },
+  { path: 'book/:idTrip', 
+    loadChildren: () => import('./routes/book/book.module').then(m => m.BookModule) 
   }
 ];
 

@@ -3,9 +3,9 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-contact',
   template: `
-    <p>
-      contact works!
-    </p>
+    <h2>
+      📨 contact works!
+    </h2>
   `,
   styles: [
   ]
