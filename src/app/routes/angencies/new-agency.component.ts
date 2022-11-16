@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators,
 } from "@angular/forms";
+import { FormsService } from "src/app/core/forms.service";
 
 @Component({
   selector: "app-new-agency",
@@ -82,7 +83,7 @@ import {
 export class NewAgencyComponent {
   form: FormGroup;
 
-  constructor(formBuilder: FormBuilder) {
+  constructor(formBuilder: FormBuilder, private forms : FormsService) {
     this.form = formBuilder.group({
       name: ["", Validators.required], // validación simple
       range: ["", [Validators.required, Validators.maxLength(10)]], //validación múltiple
@@ -95,9 +96,7 @@ export class NewAgencyComponent {
   }
 
   mustShowError(formControlName: string) {
-    const control = this.form.get(formControlName);
-    if (!control) return false;
-    return control.invalid && (control.dirty || control.touched);
+    return this.forms.mustShowError(this.form, formControlName)
   }
 
   onSubmit() {

@@ -6,6 +6,7 @@ import { LinkComponent } from './link.component';
 import { LegalComponent } from './legal.component';
 import { AuthorComponent } from './author.component';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -19,7 +20,8 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    HttpClientModule
   ],
   exports: [
     HeaderComponent,

@@ -6,6 +6,8 @@ import {
   Validators,
 } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
+import { FormsService } from "src/app/core/forms.service";
+import { OptionsService } from "src/app/core/options.service";
 
 @Component({
   selector: "app-book",
@@ -20,6 +22,7 @@ import { ActivatedRoute } from "@angular/router";
             {{ form.get("customerEmail")?.errors | json }}
           </div>
           <input
+            id="email"
             type="email"
             name="customerEmail"
             placeholder="Your email"
@@ -30,6 +33,7 @@ import { ActivatedRoute } from "@angular/router";
           <label for="gender">Gender:</label>
           <span>
             <input
+              id="gender-male"
               type="radio"
               name="gender"
               value="male"
@@ -38,6 +42,7 @@ import { ActivatedRoute } from "@angular/router";
           </span>
           <span>
             <input
+              id="gender-male"
               type="radio"
               name="gender"
               value="female"
@@ -48,6 +53,7 @@ import { ActivatedRoute } from "@angular/router";
         <div>
           <label for="seats">Seats reserved:</label>
           <input
+            id="seats"
             type="number"
             name="seats"
             placeholder="How many passengers?"
@@ -60,6 +66,7 @@ import { ActivatedRoute } from "@angular/router";
         <div>
           <label for="premiumFood">Premium food:</label>
           <input
+            id="premiumFood"
             type="checkbox"
             name="premiumFood"
             formControlName="premiumFood" />
@@ -67,6 +74,7 @@ import { ActivatedRoute } from "@angular/router";
         <div>
           <label for="paymentMethod">Payment Method:</label>
           <select
+            id="paymentMethod"
             name="paymentMethod"
             formControlName="paymentMethod"
             [attr.aria-invalid]="form.get('paymentMethod')?.invalid">
@@ -84,12 +92,21 @@ import { ActivatedRoute } from "@angular/router";
           <label for="status">Booking Status:</label>
           <span *ngFor="let so of statusOptions">
             <input
+              id="status-{{ so.value }}"
               type="radio"
               name="status"
               [value]="so.value"
               formControlName="status" />
             <label>{{ so.label }}</label>
           </span>
+        </div>
+        <div>
+          <label for="acceptedTerms">Terms Accepted:</label>
+          <input
+            id="acceptedTerms"
+            type="checkbox"
+            name="acceptedTerms"
+            formControlName="acceptedTerms" />
         </div>
       </fieldset>
       <button type="submit" [disabled]="form.invalid">Make the booking</button>
@@ -106,20 +123,15 @@ export class BookComponent {
     places: 5,
   };
   form: FormGroup;
-  paymentMethodOptions = [
-    { value: "", label: "👇🏼 Choose an option" },
-    { value: "cash", label: "💵 Cash" },
-    { value: "credit", label: "💳 Card" },
-    { value: "transfer", label: "🏦 Bank" },
-    { value: "crypto", label: "🪙 Crypto" },
-  ];
-  statusOptions = [
-    { value: "pending", label: "🕒 Pending" },
-    { value: "confirmed", label: "✅ Confirmed" },
-    { value: "cancelled", label: "❌ Cancelled" },
-  ];
+  paymentMethodOptions = this.options.paymentMethodOptions;
+  statusOptions = this.options.statusOptions;
 
-  constructor(route: ActivatedRoute, formBuilder: FormBuilder) {
+  constructor(
+    route: ActivatedRoute, 
+    formBuilder: FormBuilder, 
+    private options: OptionsService,
+    private forms: FormsService
+  ) {
     this.tripId = route.snapshot.paramMap.get("idTrip") || "";
     this.form = formBuilder.group({
       tripId: this.tripId,
@@ -139,13 +151,12 @@ export class BookComponent {
       ]),
       date: new Date().toUTCString(),
       status: this.statusOptions[0].value,
+      acceptedTerms: new FormControl(false, [Validators.requiredTrue])
     });
   }
 
   mustShowError(formControlName: string) {
-    const control = this.form.get(formControlName);
-    if (!control) return false;
-    return control.invalid && (control.dirty || control.touched);
+    return this.forms.mustShowError(this.form, formControlName);
   }
 
   onSubmit() {
