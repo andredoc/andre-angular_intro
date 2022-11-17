@@ -1,11 +1,11 @@
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
-} from "@angular/forms";
-import { ActivatedRoute } from "@angular/router";
+} from '@angular/forms';
+import { ActivatedRoute } from '@angular/router'
 import { FormsService } from "src/app/core/forms.service";
 import { OptionsService } from "src/app/core/options.service";
 

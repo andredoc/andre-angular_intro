@@ -1,10 +1,10 @@
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
-} from "@angular/forms";
+} from '@angular/forms';
 import { FormsService } from "src/app/core/forms.service";
 
 @Component({
