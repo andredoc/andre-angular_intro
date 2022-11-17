@@ -6,8 +6,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router'
-import { FormsService } from "src/app/core/forms.service";
-import { OptionsService } from "src/app/core/options.service";
+import { FormsService } from "src/app/service/forms.service";
+import { OptionsService } from "src/app/service/options.service";
 
 @Component({
   selector: "app-book",

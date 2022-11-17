@@ -5,7 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { FormsService } from "src/app/core/forms.service";
+import { FormsService } from "src/app/service/forms.service";
 
 @Component({
   selector: "app-new-agency",
