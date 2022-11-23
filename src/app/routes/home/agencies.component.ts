@@ -28,12 +28,13 @@ export class AgenciesComponent {
   }
 
   loadAgencies() {
-    this.api.getAgencies()
+    this.api.getAgencies$()
       .subscribe((agencies) => {
           this.agencies = agencies;
+          console.log("1️⃣ before in agencies space" + this.agencies.length)
           this.activeAgenciesCounter =  this.getActivateAgenciesCounter();
         });
-    console.log("agencies 💨💨💨" + this.agencies.length)
+    console.log("0️⃣ before in time agencies" + this.agencies.length)
   }
 
   getActivateAgenciesCounter() {
@@ -41,5 +42,4 @@ export class AgenciesComponent {
       (agency) => agency.status === "Active"
     ).length;
   }
-
 }

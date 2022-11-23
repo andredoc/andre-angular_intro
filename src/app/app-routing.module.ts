@@ -12,14 +12,21 @@ const routes: Routes = [
     path: 'about',
     component: AboutComponent
   },
-  { path: 'contact', 
+  { 
+    path: 'contact', 
     loadChildren: () => import('./routes/contact/contact.module').then(m => m.ContactModule)
   },
-  { path: 'agencies',
-    loadChildren: () => import('./routes/angencies/angencies.module').then(m => m.AngenciesModule) 
+  { 
+    path: 'agencies',
+    loadChildren: () => import('./routes/agencies/agencies.module').then(m => m.AgenciesModule) 
   },
-  { path: 'book/:idTrip', 
+  { 
+    path: 'book/:idTrip', 
     loadChildren: () => import('./routes/book/book.module').then(m => m.BookModule) 
+  },
+  { 
+    path: 'bookings', 
+    loadChildren: () => import('./routes/bookings/bookings.module').then(m => m.BookingsModule) 
   }
 ];
 
