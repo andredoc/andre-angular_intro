@@ -34,7 +34,7 @@ export class BookingsComponent implements OnInit {
     this.bookingViews$ = this.api.getBookings$().pipe(
       tap((bookings) => console.log("Booking from API", bookings)),
       tap((bookings) => 
-        bookings.length > 0 ? bookings : throwError("No bookings found")
+        bookings.length > 0 ? bookings : throwError("No bookings")
       ),
       map((bookings) => 
         bookings.filter((booking)=> booking.paymentMethod === "crypto")

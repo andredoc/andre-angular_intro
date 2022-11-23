@@ -12,6 +12,8 @@ import { Component, Input } from '@angular/core';
         </ul>
         <ul>
           <li><a routerLink="/agencies">➡️ Agencies</a> </li>
+          <li><a routerLink="/bookings">➡️ Bookings</a> </li>
+
         </ul>
       </nav>
     </header>
